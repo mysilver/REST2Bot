@@ -367,7 +367,7 @@
         <li>Webhook</li>
     </ul>
     <!-- fieldsets -->
-    <fieldset>
+    <fieldset class="frame">
 
         <h2 class="fs-title">Parse Open API Specs</h2>
         <h3 class="fs-subtitle">Upload your API specs to begin with</h3>
@@ -408,14 +408,21 @@
                                 onComplete: function (id, name, responseJSON, xhr) {
                                     console.log(responseJSON);
                                     console.log(name);
-                                    operations = operations.concat(responseJSON['apis'])
-                                    console.log("Operations:")
-                                    console.log(JSON.stringify(operations));
-                                    var editor = new JsonEditor('#json-display', operations);
+                                    $(".frame").fadeTo(1, 0.6)
+                                    window.setTimeout(function(){
+                                        operations = operations.concat(responseJSON['apis'])
+                                        console.log("Operations:")
+                                        console.log(JSON.stringify(operations));
+                                        var editor = new JsonEditor('#json-display', operations);
+                                        $(".frame").fadeTo(1, 1)
+                                    }, 1500);
+
+
                                 },
                                 onError: function (id, name, errorReason, xhrOrXdr) {
 //                                    alert(qq.format("Error on file number {} - {}.  Reason: {}", id, name, errorReason));
                                     console.log(xhrOrXdr);
+//                                    $(".frame").fadeTo(1, 0.6)
                                     operations = [{
                                         "operations": [{
                                             "base_path": "/data/2.5",
@@ -464,7 +471,8 @@
                                         "protocols": ["http"],
                                         "title": "OpenWeatherMap",
                                         "url": "api.openweathermap.org/data/2.5"
-                                    }, {
+                                    },
+                                        {
                                         "operations": [{
                                             "base_path": "/v3",
                                             "intent": "autocomplete",
@@ -658,7 +666,7 @@
 
         <input type="button" name="next" class="next action-button" value="Next"/>
     </fieldset>
-    <fieldset>
+    <fieldset class="frame1">
         <h2 class="fs-title">Canonical Utterance Generation</h2>
         <h3 class="fs-subtitle">Select the approaches for generating canonical utterances for extracted operations
             (intents)</h3>
@@ -990,7 +998,12 @@
                         "verb": "get"
                     }], "protocols": ["https"], "title": "Yelp V3", "url": "api.yelp.com/v3"
                 }];
-                var editor = new JsonEditor('#canonical-json-display', canonicals);
+                $(".frame1").fadeTo(1, 0.6)
+                window.setTimeout(function(){  console.log("Delay")
+                    var editor = new JsonEditor('#canonical-json-display', canonicals);
+                    $(".frame1").fadeTo(1, 1)
+                }, 3000);
+
 //                $.post(url, JSON.stringify(operations), function (data, status, xhr) {
 //                    canonicals = data;
 //                    console.log(data);
@@ -1001,7 +1014,7 @@
 
         <input type="button" name="next" class="next action-button" value="Next"/>
     </fieldset>
-    <fieldset>
+    <fieldset class="frame2">
         <h2 class="fs-title">Paraphrase</h2>
         <h3 class="fs-subtitle">To obtain diverse set of training utterances paraphrases your canonical sentences using
             the following paraphrasing systems and crowd-sourcing platforms</h3>
@@ -1081,6 +1094,7 @@
                     q += "n=" + pcount;
 
                 url = "http://localhost:8080/generate-paraphrases?" + q;
+
                 traning_data = [{
                     "operations": [{
                         "base_path": "/data/2.5",
@@ -2057,7 +2071,13 @@
                         "verb": "get"
                     }], "protocols": ["https"], "title": "Yelp V3", "url": "api.yelp.com/v3"
                 }]
-                var editor = new JsonEditor('#traning_data-json-display', traning_data);
+
+                $(".frame2").fadeTo(1, 0.6)
+                 window.setTimeout(function(){  console.log("Delay")
+                    var editor = new JsonEditor('#traning_data-json-display', traning_data);
+                    $(".frame2").fadeTo(1, 1)
+                }, 7000);
+
 
 
             }
@@ -2068,7 +2088,7 @@
 
 
     </fieldset>
-    <fieldset>
+    <fieldset class="frame3">
         <h2 class="fs-title">Train NLU Model</h2>
         <h3 class="fs-subtitle">Select you NLU platform to train your NLU model</h3>
 
@@ -2123,11 +2143,15 @@
 
 
         <input type="button" name="previous" class="previous action-button" value="Previous"/>
-        <input type="button" name="next" class="next action-button" value="Next"/>
+        <input type="button" name="next" class="next action-button" onclick='$(".frame3").fadeTo(1, 0.6)
+                 window.setTimeout(function(){  console.log("Delay")
+                    $(".frame3").fadeTo(1, 1)
+                }, 6000);
+' value="Next"/>
 
 
     </fieldset>
-    <fieldset>
+    <fieldset class="frame4">
         <h2 class="fs-title">Create a Webhook Server</h2>
         <h3 class="fs-subtitle">Select a programming language to built the webhook server</h3>
 
