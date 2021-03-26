@@ -13,7 +13,7 @@ pymantic==0.2.5
 DateTime==4.3
 Jinja2==2.11.2
 six==1.14.0
-PyYAML==5.1.2
+PyYAML==5.4
 editdistance==0.5.3
 bs4==0.0.1
 beautifulsoup4==4.4.1
